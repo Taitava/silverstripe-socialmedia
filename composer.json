@@ -1,0 +1,15 @@
+{
+  "name": "taitava/silverstripe-socialmedia",
+  "description": "This module provies a basic interface for fetching/pushing content to/from Twitter, Facebook and LinkedIn.",
+  "type": "silverstripe-module",
+  "keywords": ["silverstripe", "social media", "channel", "feed", "social", "media", "facebook", "twitter", "tweet", "linkedin", "share"],
+  "authors": [{
+    "name": "Jarkko Linnanvirta",
+    "email": "jarkko@taitavasti.fi"
+  }],
+  "minimum-stability": "dev",
+  "require": {
+    "studioibizz/oauth": ">=0.5",
+    "taitava/silverstripe-changeablelasteditedvalue": "*"
+  }
+}
