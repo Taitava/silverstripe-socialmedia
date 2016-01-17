@@ -11,5 +11,6 @@
   "require": {
     "studioibizz/oauth": ">=0.5",
     "taitava/silverstripe-changeablelasteditedvalue": "*"
-  }
+  },
+  "license": "MIT"
 }
