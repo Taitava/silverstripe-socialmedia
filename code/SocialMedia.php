@@ -15,16 +15,27 @@ class SocialMedia extends Object
 		if (false === $linkedin_updates) $linkedin_updates = array();
 		$updates = array_merge($twitter_updates, $facebook_updates, $linkedin_updates);
 		if ($echo) echo count($updates) > 0 ? "Writing ".count($updates)." updates to the database...<br />" : 'No updates to write to the database.<br />';
-		foreach ($updates as $update)
+
+		/**
+		 * @var SocialMediaImporterInterface $importer
+		 */
+		foreach (ClassInfo::implementorsOf('SocialMediaImporterInterface') as $importer)
 		{
-			$blog_post = new BlogPost;
-			$blog_post->ParentID = 19;
-			foreach ($update as $key => $value) $blog_post->$key = $value;
-			$blog_post->doPublish();
+			$importer->ImportUpdates($updates);
 		}
 	}
 
 
+}
+
+/**
+ * Classes implementing SocialMediaImporterInterface are used to save imported social media updates to dataobjects, in
+ * whatever way the programmer want's to..
+ * Interface SocialMediaImporter
+ */
+interface SocialMediaImporterInterface
+{
+	public static function ImportUpdates(array $updates);
 }
 
 
