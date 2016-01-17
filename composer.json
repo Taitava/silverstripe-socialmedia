@@ -12,5 +12,6 @@
     "studioibizz/oauth": ">=0.5",
     "taitava/silverstripe-changeablelasteditedvalue": "*"
   },
+  "installer-name": "socialmedia",
   "license": "MIT"
 }
