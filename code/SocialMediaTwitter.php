@@ -123,6 +123,7 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 			'Content'	=> $html,
 			'Title'		=> $title->Summary(self::config()->title_length),
 			'TwitterID'	=> $tweet->id,
+			'Locale'	=> $tweet->lang,
 			'Source'	=> 'Twitter',
 		);
 	}
