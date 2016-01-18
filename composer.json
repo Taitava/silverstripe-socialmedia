@@ -10,7 +10,8 @@
   "minimum-stability": "dev",
   "require": {
     "studioibizz/oauth": ">=0.5",
-    "taitava/silverstripe-changeablelasteditedvalue": "*"
+    "taitava/silverstripe-changeablelasteditedvalue": "*",
+    "abraham/twitteroauth": "*"
   },
   "extra": {
     "installer-name": "socialmedia"
