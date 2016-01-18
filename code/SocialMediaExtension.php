@@ -26,16 +26,6 @@ class SocialMediaExtension extends Extension
 
 	private $plaintext			= null;
 
-	/**
-	 * A signal to tell that the export has succeeded and social media ID references are stored in the owner object
-	 * and need to be written to the database.
-	 * @var bool
-	 */
-	private $do_write			= false;
-
-	private $disable_onAfterPublish		= false;
-
-
 	public function UpdateCMSFields(FieldList $fields)
 	{
 		if ($this->IsInSocialMedia())
@@ -56,15 +46,6 @@ class SocialMediaExtension extends Extension
 		if (empty($this->plaintext)) return;
 		if (empty($this->owner->TwitterID)) $this->ToTwitter();
 		if (empty($this->owner->LinkedInID)) $this->ToLinkedIn();
-		/*if ($this->do_write)
-		{
-			//The above To*SomeThing*() methods do not call write() in order to prevent calling it three
-			//times per DataObject. This is why the writing is delayed to happen in here.
-			$this->disable_onAfterPublish	= true;
-			$this->owner->write();
-			$this->do_write			= false;
-			$this->disable_onAfterPublish	= false;
-		}*/
 	}
 
 	public function isInSocialMedia()
@@ -74,7 +55,6 @@ class SocialMediaExtension extends Extension
 
 	public function onBeforePublish()
 	{
-		//if (!$this->disable_onAfterPublish) $this->ToSocialMedia();
 		$this->ToSocialMedia();
 	}
 
