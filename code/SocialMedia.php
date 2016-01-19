@@ -23,7 +23,7 @@ class SocialMedia extends Object
 		 */
 		foreach (ClassInfo::implementorsOf('SocialMediaImporterInterface') as $importer)
 		{
-			$importer->ImportUpdates($updates);
+			$importer::ImportUpdates($updates);
 		}
 	}
 
@@ -114,7 +114,7 @@ class SocialMediaFetchTask extends BuildTask
 
 	public function run($request)
 	{
-		echo 'Begin <br />';
+		echo 'Begin (if you do not see "Finished" below, the import has crashed!)<br />';
 		SocialMedia::Fetch(true);
 		echo 'Finished';
 
