@@ -6,10 +6,12 @@ class SocialMedia extends Object
 	{
 		if ($echo) echo "Fetching updates from Twitter...<br />";
 		$twitter_updates	= SocialMediaTwitter::Fetch();
-		if ($echo) echo "Fetching updates from Facebook...<br />";
+		/*if ($echo) echo "Fetching updates from Facebook...<br />";
 		$facebook_updates	= SocialMediaFacebook::Fetch();
 		if ($echo) echo "Fetching updates from LinkedIn...<br />";
-		$linkedin_updates	= SocialMediaLinkedIn::Fetch();
+		$linkedin_updates	= SocialMediaLinkedIn::Fetch();*/
+		$linkedin_updates	= array();
+		$facebook_updates	= array();
 		if (false === $twitter_updates) $twitter_updates = array();	//If errors happen, don't let them
 		if (false === $facebook_updates) $facebook_updates = array();	//interrupt the array_merge operation.
 		if (false === $linkedin_updates) $linkedin_updates = array();

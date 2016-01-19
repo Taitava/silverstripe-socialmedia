@@ -45,7 +45,7 @@ class SocialMediaExtension extends Extension
 		$this->plaintext = trim(Convert::html2raw($this->owner->Content, false, 9999));
 		if (empty($this->plaintext)) return;
 		if (empty($this->owner->TwitterID)) $this->ToTwitter();
-		if (empty($this->owner->LinkedInID)) $this->ToLinkedIn();
+		//if (empty($this->owner->LinkedInID)) $this->ToLinkedIn();
 	}
 
 	public function isInSocialMedia()
@@ -83,6 +83,7 @@ class SocialMediaExtension extends Extension
 
 	private function ToLinkedIn()
 	{
+		return false; //TODO
 		if (mb_strlen($this->plaintext) > (self::LinkedInMaxStatusLength))
 		{
 			$description = mb_substr($this->plaintext,0,self::LinkedInMaxStatusLength-3).'...';
