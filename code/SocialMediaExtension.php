@@ -30,7 +30,8 @@ class SocialMediaExtension extends Extension
 	{
 		if ($this->IsInSocialMedia())
 		{
-			$fields->addFieldToTab('Root.Main', new ReadonlyField('PublishInSocialMedia', 'Jul'), 'Content');
+			$fields->addFieldToTab('Root.Main', $text = new CompositeField(), 'Content');
+			$text->setDescription('Tämä blogiartikkeli on julkaistu sosiaalisessa mediassa. Muutokset blogiin eivät enää päivity sosiaaliseen mediaan. Jos poistat blogin, se ei poistu somesta automaattisesti.');
 		}
 		else
 		{
@@ -50,12 +51,13 @@ class SocialMediaExtension extends Extension
 
 	public function isInSocialMedia()
 	{
-		return !empty($this->TwitterID) or !empty($this->FacebookID) or !empty($this->LinkedInID);
+		//return !empty($this->owner->TwitterID) or !empty($this->owner->FacebookID) or !empty($this->owner->LinkedInID);
+		return !empty($this->owner->TwitterID);
 	}
 
 	public function onBeforePublish()
 	{
-		$this->ToSocialMedia();
+		if ($this->owner->PublishInSocialMedia) $this->ToSocialMedia();
 	}
 
 
