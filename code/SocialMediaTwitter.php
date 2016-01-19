@@ -51,7 +51,12 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 	public static function Connection()
 	{
 		if (self::$connection) return self::$connection;
-		$config           = self::config();
+		$config = self::config();
+		if (	empty($config->consumer_key) ||
+			empty($config->consumer_secret) ||
+			empty($config->oauth_token) ||
+			empty($config->oauth_token_secret))
+			throw new Exception(__CLASS__.'::'.__METHOD__.'(): Twitter credentials do not exist in the configuration.');
 		self::$connection = new TwitterOAuth(
 			$config->consumer_key,
 			$config->consumer_secret,
@@ -62,7 +67,7 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 
 		//Test the connection
 		self::$connection->get('account/verify_credentials');
-		if (self::Error()) return false;
+		if (self::Error()) throw new Exception(__CLASS__.'::'.__METHOD__.'(): Connection failed.');
 		return self::$connection;
 	}
 
