@@ -51,23 +51,27 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 	public static function Connection()
 	{
 		if (self::$connection) return self::$connection;
-		$config = self::config();
-		if (	empty($config->consumer_key) ||
-			empty($config->consumer_secret) ||
-			empty($config->oauth_token) ||
-			empty($config->oauth_token_secret))
-			throw new Exception(__CLASS__.'::'.__METHOD__.'(): Twitter credentials do not exist in the configuration.');
+		$config			= self::config();
+		$consumer_key		= $config->consumer_key;
+		$consumer_secret	= $config->consumer_secret;
+		$oauth_token		= $config->oauth_token;
+		$oauth_token_secret	= $config->oauth_token_secret;
+		if (	empty($consumer_key) ||
+			empty($consumer_secret) ||
+			empty($oauth_token) ||
+			empty($oauth_token_secret))
+			throw new Exception(__METHOD__.'(): Twitter credentials do not exist in the configuration.');
 		self::$connection = new TwitterOAuth(
-			$config->consumer_key,
-			$config->consumer_secret,
-			$config->oauth_token,
-			$config->oauth_token_secret
+			$consumer_key,
+			$consumer_secret,
+			$oauth_token,
+			$oauth_token_secret
 		);
 		self::$connection->setTimeouts(30,30);
 
 		//Test the connection
 		self::$connection->get('account/verify_credentials');
-		if (self::Error()) throw new Exception(__CLASS__.'::'.__METHOD__.'(): Connection failed.');
+		if (self::Error()) throw new Exception(__METHOD__.'(): Connection failed.');
 		return self::$connection;
 	}
 
