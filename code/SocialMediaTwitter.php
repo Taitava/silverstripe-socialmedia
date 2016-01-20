@@ -78,11 +78,8 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 		self::$connection->setTimeouts(30,30);
 
 		//Test the connection
-		/**
-		 * @var Abraham\TwitterOAuth\Response $response
-		 */
 		$response = self::$connection->get('account/verify_credentials');
-		if (self::Error()) throw new Exception(__METHOD__.'(): Connection failed. Reason: '.$response->getBody());
+		if (self::Error()) throw new Exception(__METHOD__.'(): Connection failed. Reason: '.$response->error);
 		return self::$connection;
 	}
 
