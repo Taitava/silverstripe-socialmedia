@@ -1,0 +1,1 @@
+<blockquote class="twitter-tweet" lang="$Locale2C">$Content(0)&mdash; $SoMeAuthor (@$SoMeUsername9) <a href="https://twitter.com/$SoMeUsername/status/$TwitterID">$Created.Format('j|n Y')</a></blockquote>

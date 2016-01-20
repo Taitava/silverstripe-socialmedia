@@ -132,9 +132,10 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 		return array(
 			'LastEdited'	=> (string) $date,
 			'Created'	=> (string) $date,
-			'Fetched'	=> SS_Datetime::now(),					//Not used
-			'Author' 	=> $tweet->user->screen_name,				//Not used
-			'Avatar'	=> $tweet->user->profile_image_url,			//Not used
+			'Fetched'	=> SS_Datetime::now(),
+			'SoMeAuthor' 	=> $tweet->user->screen_name,
+			'SoMeUsername'	=> self::config()->username,
+			'Avatar'	=> $tweet->user->profile_image_url,
 			'Content'	=> $html,
 			'Title'		=> $title->Summary(self::config()->title_length),
 			'TwitterID'	=> $tweet->id,

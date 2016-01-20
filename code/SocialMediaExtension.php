@@ -19,8 +19,11 @@ class SocialMediaExtension extends Extension
 		'TwitterID'		=> 'Text',
 		'FacebookID'		=> 'Text',
 		'LinkedInID'		=> 'Text',
+		'SoMeAuthor'		=> 'Text',
+		'SoMeUsername'		=> 'Text',
 		'Source'		=> 'Varchar(20)',
 		'PublishInSocialMedia'	=> 'Boolean',
+		'Locale'		=> 'Varchar(5)', //Translatable defines this too, but make sure it exists even when Translatable is not used
 	);
 
 
@@ -81,6 +84,21 @@ class SocialMediaExtension extends Extension
 		if (SocialMediaTwitter::Error()) return false;
 		$this->owner->TwitterID = $data->id;
 		return true;
+	}
+
+	public function Content($decorate=true)
+	{
+		if (!$decorate or strtolower($this->owner->Source) != 'twitter') return $this->owner->Content;
+		Requirements::javascript('socialmedia/javascript/Twitter.js');
+		return $this->owner->renderWith('SocialMedia_Tweet');
+	}
+
+	/**
+	 * Two characters long version of Locale
+	 */
+	public function Locale2C()
+	{
+		return strtolower(substr($this->owner->Locale,0,2));
 	}
 
 	private function ToLinkedIn()
