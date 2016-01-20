@@ -35,7 +35,7 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 		$skipped	= 0;
 		foreach ($tweets as $tweet)
 		{
-			if (!DataObject::get('BlogPost', 'TwitterID = ' . Convert::raw2sql($tweet->id))->exists()) //TODO: Make the check not class specific (don't hard code 'BlogPost' here).
+			if (!DataObject::get('BlogPost', 'TwitterID = "' . Convert::raw2sql($tweet->id).'"')->exists()) //TODO: Make the check not class specific (don't hard code 'BlogPost' here).
 			{
 				//Do not supply the tweet if a DataObject with the same Twitter ID already exists.
 				//However, $max_id can still be updated with the already existing ID number. This will
