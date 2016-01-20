@@ -1,3 +1,3 @@
 ChangeableLastEditedValue:
   affect_last_edited: true
-  affect_publish_date: true
+  affect_publish_date: false #Not working correctly
