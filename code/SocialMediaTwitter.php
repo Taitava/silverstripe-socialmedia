@@ -137,7 +137,7 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 			'SoMeUsername'	=> self::config()->username,
 			'Avatar'	=> $tweet->user->profile_image_url,
 			'Content'	=> $html,
-			'Title'		=> $title->Summary(self::config()->title_length),
+			'Title'		=> preg_replace('/\.$/','', $title->Summary(self::config()->title_length)), //For some reason the Summary method adds a trailing dot. Remove it.
 			'TwitterID'	=> $tweet->id,
 			'Locale'	=> $tweet->lang,
 			'Source'	=> 'Twitter',
