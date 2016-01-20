@@ -11,7 +11,7 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 	 */
 	private static $connection = null;
 
-	public static function Fetch()
+	public static function Fetch($echo = false)
 	{
 
 		$since_id = (int) SocialMediaSettings::getValue('TwitterIndex');
@@ -32,6 +32,7 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 
 		$updates	= array();
 		$max_id		= (int) SocialMediaSettings::getValue('TwitterIndex');
+		$skipped	= 0;
 		foreach ($tweets as $tweet)
 		{
 			if (!DataObject::get('BlogPost', 'TwitterID = ' . Convert::raw2sql($tweet->id))->exists()) //TODO: Make the check not class specific (don't hard code 'BlogPost' here).
@@ -41,9 +42,14 @@ class SocialMediaTwitter extends Object implements SocialMediaInterface
 				//Ensure we do not have to loop over this tweet again.
 				$updates[] = self::tweet_to_array($tweet);
 			}
+			else
+			{
+				$skipped++;
+			}
 			$max_id = max($max_id, (int) $tweet->id);
 		}
-
+		if ($echo and $skipped > 0) echo "Twitter: Skipped $skipped existing records. This is normal if its only a few records occasionally, but if it happens every time and the number is constant or raises, then the Twitter's 'since_id' parameter is not working correctly. If the count reaches 200, it might be that you won't get any new records at all, because Twitter's maximum count for returned records per query is 200 at the moment when writing this (January 2016). Also constant skipping might affect performance.<br />";
+		if ($echo) echo "Twitter: since_id was $since_id and is now $max_id.<br />";
 		SocialMediaSettings::setValue('TwitterIndex', $max_id); //Keep track of where we left, so we don't get the same tweets next time.
 		return $updates;
 	}

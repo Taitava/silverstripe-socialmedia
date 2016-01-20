@@ -5,7 +5,7 @@ class SocialMedia extends Object
 	public static function Fetch($echo=false)
 	{
 		if ($echo) echo "Fetching updates from Twitter...<br />";
-		$twitter_updates	= SocialMediaTwitter::Fetch();
+		$twitter_updates	= SocialMediaTwitter::Fetch($echo);
 		/*if ($echo) echo "Fetching updates from Facebook...<br />";
 		$facebook_updates	= SocialMediaFacebook::Fetch();
 		if ($echo) echo "Fetching updates from LinkedIn...<br />";
@@ -58,7 +58,7 @@ class SocialMediaFacebook
 
 interface SocialMediaInterface
 {
-	public static function Fetch();
+	public static function Fetch($echo=false);
 
 	public static function Connection();
 
@@ -80,7 +80,7 @@ class SocialMediaSettings extends DataObject
 	private static $object;
 
 	private static $db = array(
-		'TwitterIndex'		=> 'Int',
+		'TwitterIndex'		=> 'Text',
 	);
 
 	public static function getValue($property)
