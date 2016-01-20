@@ -23,7 +23,6 @@ class SocialMediaExtension extends Extension
 		'SoMeUsername'		=> 'Text',
 		'Source'		=> 'Varchar(20)',
 		'PublishInSocialMedia'	=> 'Boolean',
-		'Locale'		=> 'Varchar(5)', //Translatable defines this too, but make sure it exists even when Translatable is not used
 	);
 
 
